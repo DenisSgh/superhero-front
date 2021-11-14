@@ -1,0 +1,38 @@
+.pagination {
+  display: flex;
+  margin-top: 20px;
+}
+
+.items {
+  display: flex;
+}
+
+.selected {
+  font-size: 30px;
+}
+
+[class='selected'] {
+  color: red;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.pagination > li.active > a {
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+  cursor: pointer;
+}
+
+.pagination > li > a:hover {
+  background-color: #3f51b5;
+  color: white;
+  cursor: pointer;
+}
