@@ -1,17 +1,18 @@
-import { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import shortid from 'shortid';
 
-// import { getContacts } from 'redux/contacts/contactsSelectors';
-// import {
-//   fetchAddContact,
-//   fetchEditContact,
-// } from 'redux/contacts/contactsOperations';
+import {
+  fetchHeroes,
+  fetchAddHero,
+  fetchEditHero,
+  fetchHeroById,
+} from 'redux/heroes/heroesOperations';
 import { CssButton, CssTextField } from 'components/customInputs';
-import { fetchAddHero, fetchEditHero } from '../ApiService';
 
 import s from './Form.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHero, getPage } from 'redux/heroes/heroesSelectors';
 
 const Form = ({
   id,
@@ -34,13 +35,17 @@ const Form = ({
   const [superpowers, setSuperpowers] = useState(superpowersEdit);
   const [catchPhrase, setCatchPhrase] = useState(catchPhraseEdit);
   const [images, setImages] = useState(imagesEdit);
-  // const contacts = useSelector(getContacts);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isButtonDisable = nickname === '';
+  const page = useSelector(getPage);
+  const [closeModal, setCloseModal] = useState();
+  const hero = useSelector(getHero);
 
-  // useEffect(() => {
-  //   console.log(images);
-  // }, [images]);
+  useEffect(() => {
+    if (hero) {
+      dispatch(fetchHeroById({ id }));
+    }
+  }, [closeModal]);
 
   const handleCreateContact = e => {
     const { name, value } = e.currentTarget;
@@ -94,13 +99,12 @@ const Form = ({
 
     switch (action) {
       case 'add':
-        fetchAddHero(dataForm).then(res => console.log(res));
-        // dispatch(fetchAddContact({ name, number }));
+        dispatch(fetchAddHero(dataForm));
         break;
 
       case 'edit':
-        fetchEditHero(id, dataForm).then(res => console.log(res));
-        // dispatch(fetchEditContact({ id, name, number }));
+        dispatch(fetchEditHero({ id, data }));
+        setCloseModal(1);
         break;
 
       default:
@@ -108,6 +112,7 @@ const Form = ({
     }
 
     reset();
+    dispatch(fetchHeroes({ page }));
   };
 
   const reset = () => {
@@ -197,24 +202,26 @@ const Form = ({
           />
         </div>
 
-        <div className={s.inputContainer}>
-          <input
-            id="contained-button-file"
-            type="file"
-            className={classes.input}
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={handleCreateContact}
-          />
-          <label htmlFor="contained-button-file">
-            <CssButton variant="outlined" component="span">
-              {!images
-                ? 'Upload superhero images'
-                : `${images.length} uploaded images`}
-            </CssButton>
-          </label>
-        </div>
+        {action !== 'edit' && (
+          <div className={s.inputContainer}>
+            <input
+              id="contained-button-file"
+              type="file"
+              className={classes.input}
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleCreateContact}
+            />
+            <label htmlFor="contained-button-file">
+              <CssButton variant="outlined" component="span">
+                {!images
+                  ? 'Upload superhero images'
+                  : `${images.length} uploaded images`}
+              </CssButton>
+            </label>
+          </div>
+        )}
 
         <CssButton type="submit" variant="outlined" disabled={isButtonDisable}>
           {actionName}

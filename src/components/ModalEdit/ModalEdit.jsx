@@ -4,17 +4,9 @@ import { Modal, Backdrop, Fade } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import s from './ModalEdit.module.css';
 import Form from 'components/Form';
+import { CssButtonLogOut } from 'components/customInputs';
 
-export default function ModalEdit({
-  id,
-  nickname,
-  realName,
-  originDescription,
-  superpowers,
-  catchPhrase,
-  images,
-  action,
-}) {
+export default function ModalEdit({ action, hero }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -28,9 +20,10 @@ export default function ModalEdit({
 
   return (
     <div>
-      <button className={s.button} type="button" onClick={handleOpen}>
+      <CssButtonLogOut variant="outlined" onClick={handleOpen}>
         <EditIcon />
-      </button>
+        <span className={s.buttonText}>Edit</span>
+      </CssButtonLogOut>
 
       <Modal
         open={open}
@@ -47,17 +40,19 @@ export default function ModalEdit({
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <Form
-              id={id}
-              nicknameEdit={nickname}
-              realNameEdit={realName}
-              originDescriptionEdit={originDescription}
-              superpowersEdit={superpowers}
-              catchPhraseEdit={catchPhrase}
-              imagesEdit={images}
-              action={action}
-              actionName="Edit superhero"
-            />
+            {hero && (
+              <Form
+                id={hero._id}
+                nicknameEdit={hero.nickname}
+                realNameEdit={hero.realName}
+                originDescriptionEdit={hero.originDescription}
+                superpowersEdit={hero.superpowers}
+                catchPhraseEdit={hero.catchPhrase}
+                // imagesEdit={hero.images}
+                action={action}
+                actionName="Edit superhero"
+              />
+            )}
           </div>
         </Fade>
       </Modal>

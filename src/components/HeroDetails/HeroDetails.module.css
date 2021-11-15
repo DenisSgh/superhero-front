@@ -1,0 +1,47 @@
+.goBackButton {
+  width: 120px;
+  margin: 15px 0;
+}
+
+.detailsSection {
+  display: flex;
+  width: 800px;
+  /* justify-content: flex-start; */
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  width: 800px;
+  margin-bottom: 15px;
+}
+
+.buttonText {
+  margin-left: 5px;
+}
+
+.listImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+
+.listImages li:not(:last-child) {
+  margin-right: 15px;
+}
+
+.detailsContainer {
+  margin-left: 15px;
+}
+
+.detailsTitle {
+  margin-bottom: 15px;
+  font-size: 38px;
+}
+
+.detailsText {
+  margin-bottom: 15px;
+  font-size: 26px;
+}

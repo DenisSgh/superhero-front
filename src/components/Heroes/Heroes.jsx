@@ -1,26 +1,24 @@
-// import { useState, useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-// import { getVisibleContacts } from 'redux/contacts/contactsSelectors';
-// import {
-//   fetchContacts,
-//   fetchDeleteContact,
-// } from 'redux/contacts/contactsOperations';
+import { fetchHeroes, fetchDeleteHero } from 'redux/heroes/heroesOperations';
+import { getHeroes, getTotalDocs } from 'redux/heroes/heroesSelectors';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-import { fetchDeleteHero } from 'components/ApiService';
 import Pagination from 'components/Pagination';
 import s from './Heroes.module.css';
 
-const Heroes = ({ setPage, heroes, totalDocs }) => {
-  // const contacts = useSelector(getVisibleContacts);
-  // const dispatch = useDispatch();
+const Heroes = () => {
+  const [page, setPage] = useState(1);
+  const heroes = useSelector(getHeroes);
+  const totalDocs = useSelector(getTotalDocs);
+  const dispatch = useDispatch();
   const location = useLocation();
 
-  const deleteHero = async id => {
-    fetchDeleteHero(id);
-  };
+  useEffect(() => {
+    dispatch(fetchHeroes({ page }));
+  }, [dispatch, page]);
 
   const newPageNumber = async newPage => {
     setPage(newPage);
@@ -45,7 +43,7 @@ const Heroes = ({ setPage, heroes, totalDocs }) => {
                   >
                     <img
                       src={
-                        images
+                        images.length > 0
                           ? images[0]
                           : 'https://ct.counseling.org/wp-content/uploads/2018/06/Depositphotos_64985287_m-2015-624x542.jpg'
                       }
@@ -69,7 +67,10 @@ const Heroes = ({ setPage, heroes, totalDocs }) => {
                   <button
                     className={s.button}
                     type="button"
-                    onClick={() => deleteHero(_id)}
+                    onClick={() => {
+                      dispatch(fetchDeleteHero({ _id }));
+                      dispatch(fetchHeroes({ page }));
+                    }}
                   >
                     <DeleteIcon />
                   </button>
@@ -77,13 +78,9 @@ const Heroes = ({ setPage, heroes, totalDocs }) => {
               </li>
             ))}
           </ul>
-          {/* {totalDocs > 5 && ( */}
-          <Pagination
-            itemsPerPage={5}
-            newPageNumber={newPageNumber}
-            totalDocs={totalDocs}
-          />
-          {/* )} */}
+          {totalDocs > 5 && (
+            <Pagination newPageNumber={newPageNumber} totalDocs={totalDocs} />
+          )}
         </>
       ) : (
         <p className={s.empty}>
