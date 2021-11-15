@@ -3,16 +3,12 @@ import ReactPaginate from 'react-paginate';
 
 import s from './Pagination.module.css';
 
-export default function PaginatedItems({
-  itemsPerPage,
-  newPageNumber,
-  totalDocs,
-}) {
+export default function PaginatedItems({ newPageNumber, totalDocs }) {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    setPageCount(Math.ceil(totalDocs / itemsPerPage));
-  }, [totalDocs, itemsPerPage]);
+    setPageCount(Math.ceil(totalDocs / 5));
+  }, [totalDocs, pageCount]);
 
   const handlePageClick = event => {
     const newOffset = event.selected + 1;
@@ -23,11 +19,11 @@ export default function PaginatedItems({
     <ReactPaginate
       className={s.pagination}
       breakLabel="..."
-      nextLabel="next >"
+      nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       pageCount={pageCount}
-      previousLabel="< previous"
+      previousLabel="<"
       renderOnZeroPageCount={null}
     />
   );
