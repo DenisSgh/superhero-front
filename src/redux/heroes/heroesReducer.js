@@ -24,7 +24,6 @@ const items = createReducer([], {
         originDescription,
         superpowers,
         catchPhrase,
-        // images,
       },
     },
   ) =>

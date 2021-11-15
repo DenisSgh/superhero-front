@@ -48,7 +48,6 @@ export default function ModalEdit({ action, hero }) {
                 originDescriptionEdit={hero.originDescription}
                 superpowersEdit={hero.superpowers}
                 catchPhraseEdit={hero.catchPhrase}
-                // imagesEdit={hero.images}
                 action={action}
                 actionName="Edit superhero"
               />

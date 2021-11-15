@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:4000/api';
 axios.defaults.baseURL = 'https://superhero-db.herokuapp.com/api';
 
 export const fetchHeroes = createAsyncThunk(
@@ -56,7 +55,6 @@ export const fetchEditHero = createAsyncThunk(
   'heroes/editHero',
   async ({ id, data: dataEdit }, { rejectWithValue }) => {
     try {
-      console.log(dataEdit);
       const { data } = await axios.put(`/heroes/${id}`, dataEdit);
       return data;
     } catch (error) {

@@ -45,6 +45,7 @@ const Form = ({
     if (hero) {
       dispatch(fetchHeroById({ id }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closeModal]);
 
   const handleCreateContact = e => {
