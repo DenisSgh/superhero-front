@@ -66,10 +66,6 @@ export const fetchEditHero = createAsyncThunk(
 export const cleanHero = createAsyncThunk(
   'heroes/cleanHero',
   async (_, { rejectWithValue }) => {
-    try {
-      return null;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    return null;
   },
 );
