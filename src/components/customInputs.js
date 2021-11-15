@@ -9,8 +9,9 @@ export const CssButton = withStyles({
 export const CssButtonLogOut = withStyles({
   root: {
     textTransform: 'none',
-    padding: '5px',
+    padding: '5px 10px',
     minWidth: '40px',
+    marginRight: '10px',
   },
 })(Button);
 
