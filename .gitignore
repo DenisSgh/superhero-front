@@ -103,5 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
+# production
+/build
+
 #
 package-lock.json
+
+# Local Netlify folder
+.netlify
