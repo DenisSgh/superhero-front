@@ -44,7 +44,7 @@ export default function HeroDetails() {
         </CssButtonLogOut>
         <ModalEdit action="edit" hero={hero} />
       </div>
-      {/* {hero && (
+      {hero && (
         <section className={s.detailsSection}>
           <ul className={s.listImages}>
             {hero.images.length > 0 ? (
@@ -71,7 +71,7 @@ export default function HeroDetails() {
           <p className={s.detailsText}>Superpowers: {hero.superpowers}</p>
           <p className={s.detailsText}>Catch phrase: {hero.catchPhrase}</p>
         </section>
-      )} */}
+      )}
     </>
   );
 }

@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://superhero-db.herokuapp.com/api';
-// axios.defaults.baseURL = 'http://localhost:4000/api';
 
 export const fetchHeroes = createAsyncThunk(
   'heroes/getHeroes',
