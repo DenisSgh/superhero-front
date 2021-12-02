@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Container from 'components/Container';
+// import HomeView from './views/HomeView';
+// import HeroView from './views/HeroView';
 const HomeView = lazy(() => import('./views/HomeView'));
 const HeroView = lazy(() => import('./views/HeroView'));
 
