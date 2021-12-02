@@ -4,6 +4,7 @@ import ModalEdit from 'components/ModalEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeroById, cleanHero } from 'redux/heroes/heroesOperations';
 import { getHero } from 'redux/heroes/heroesSelectors';
+import { isEmpty } from 'lodash';
 
 import s from './HeroDetails.module.css';
 import { CssButtonLogOut } from 'components/customInputs';
@@ -44,7 +45,7 @@ export default function HeroDetails() {
         </CssButtonLogOut>
         <ModalEdit action="edit" hero={hero} />
       </div>
-      {hero && (
+      {!isEmpty(hero) && (
         <section className={s.detailsSection}>
           <ul className={s.listImages}>
             {hero.images.length > 0 ? (
